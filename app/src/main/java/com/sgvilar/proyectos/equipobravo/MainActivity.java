@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,7 +40,13 @@ public class MainActivity extends AppCompatActivity implements  GoogleApiClient.
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private GoogleApiClient mGoogleApiClient;
+    private static GoogleApiClient mGoogleApiClient;
+
+    public static GoogleApiClient getmGoogleApiClient() {
+        return mGoogleApiClient;
+    }
+
+    private static final String TAG = "MainActivity";
 
 
     @Override
@@ -60,22 +67,25 @@ public class MainActivity extends AppCompatActivity implements  GoogleApiClient.
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        // [START configure_signin]
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+      /*
+      *
+      * Google Auth
+      *
+      * */
+
+
+        // [START config_signin]
+        // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        // [END configure_signin]
+        // [END config_signin]
 
-        // [START build_client]
-        // Build a GoogleApiClient with access to the Google Sign-In API and the
-        // options specified by gso.
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-        // [END build_client]
     }
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
@@ -92,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements  GoogleApiClient.
             // and the GoogleSignInResult will be available instantly.
 
 
-//            Log.d(TAG, "Got cached sign-in");
+            Log.d(TAG, "Got cached sign-in");
 //            GoogleSignInResult result = opr.get();
 //            handleSignInResult(result);
 

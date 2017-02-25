@@ -4,4 +4,8 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="clasification_UPPER">CLASIFICACIÓN</string>
     <string name="history_UPPER">HISTORIAL</string>
+    <string name="google_title_text">Google Sign In</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="desc_firebase_lockup">Firebase logo and name</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
