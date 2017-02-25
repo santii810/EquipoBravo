@@ -24,7 +24,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 
-public class MainActivity extends AppCompatActivity implements  GoogleApiClient.OnConnectionFailedListener{
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements  GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
     }
+
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
@@ -134,7 +135,11 @@ public class MainActivity extends AppCompatActivity implements  GoogleApiClient.
         if (id == R.id.action_settings) {
             return true;
         }
-
+        if (id == R.id.action_profile) {
+            Intent profileIntent = new Intent(this, ProfileActivity.class);
+            startActivity(profileIntent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
