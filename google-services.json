@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "720473449228",
+    "firebase_url": "https://equipobravo-52117.firebaseio.com",
+    "project_id": "equipobravo-52117",
+    "storage_bucket": "equipobravo-52117.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720473449228:android:0ff7671788e4a377",
+        "android_client_info": {
+          "package_name": "com.sgvilar.proyectos.equipobravo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720473449228-jk2nevq1cvk0rovdd0dj5jg3fs09ebg7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sgvilar.proyectos.equipobravo",
+            "certificate_hash": "36938ae056ad7682602598381d06cf3fab2ca0bc"
+          }
+        },
+        {
+          "client_id": "720473449228-ircmouujr9c1b8iqv9ialc811pb8fia7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBngERhJDDIO4ymfGGlqstErmQTzIQdGbg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720473449228-ircmouujr9c1b8iqv9ialc811pb8fia7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
