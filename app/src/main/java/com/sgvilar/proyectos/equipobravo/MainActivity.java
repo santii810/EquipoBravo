@@ -40,11 +40,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private static GoogleApiClient mGoogleApiClient;
+    private  GoogleApiClient mGoogleApiClient;
 
-    public static GoogleApiClient getmGoogleApiClient() {
-        return mGoogleApiClient;
-    }
 
     private static final String TAG = "MainActivity";
 
@@ -96,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onStart() {
         super.onStart();
-
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
         if (opr.isDone()) {
             // If the user's cached credentials are valid, the OptionalPendingResult will be "done"

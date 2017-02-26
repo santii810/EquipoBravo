@@ -12,5 +12,5 @@
         android:orderInCategory="101"
         android:title="@string/action_profile"
         app:showAsAction="always"
-        android:icon="@mipmap/ic_profile"/>
+        android:icon="@mipmap/ic_profile" />
 </menu>

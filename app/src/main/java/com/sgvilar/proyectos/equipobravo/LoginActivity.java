@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -18,7 +19,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "LoginActivity";
-
+    private static GoogleApiClient mGoogleApiClient;
 
 
     @Override
@@ -27,8 +28,20 @@ public class LoginActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_login);
 
         // Button listeners
-        findViewById(R.id.sign_in_button).setOnClickListener((View.OnClickListener) this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
+        findViewById(R.id.sign_in_button).setOnClickListener(this);
+
+        // [START config_signin]
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        // [END config_signin]
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
     }
 
 
@@ -43,16 +56,12 @@ public class LoginActivity extends AppCompatActivity implements
             case R.id.sign_in_button:
                 signIn();
                 break;
-            case R.id.sign_out_button:
-                //   signOut();
-                break;
-
         }
     }
 
     // [START signIn]
     private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(MainActivity.getmGoogleApiClient());
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
     // [END signIn]
@@ -76,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements
         if (result.isSuccess()) {
             finish();
             // Signed in successfully, show authenticated UI.
-       //     account = result.getSignInAccount();
+            //     account = result.getSignInAccount();
 
 
         } else {
