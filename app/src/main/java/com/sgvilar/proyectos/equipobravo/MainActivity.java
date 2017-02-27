@@ -24,6 +24,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 
+import model.UserMapper;
+
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     /**
@@ -42,9 +44,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private ViewPager mViewPager;
     private  GoogleApiClient mGoogleApiClient;
 
-
     private static final String TAG = "MainActivity";
 
+    public static UserMapper getUserMapper() {
+        return userMapper;
+    }
+
+    private static UserMapper userMapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+
+
+        userMapper = new UserMapper();
     }
 
     @Override

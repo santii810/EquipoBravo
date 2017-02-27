@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.auth.api.Auth;
@@ -12,6 +11,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import model.User;
 
 
 public class LoginActivity extends AppCompatActivity implements
@@ -73,25 +74,20 @@ public class LoginActivity extends AppCompatActivity implements
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
+
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
+
+            if (result.isSuccess()) {
+             MainActivity.getUserMapper().add(new User(result.getSignInAccount().getEmail(), result.getSignInAccount().getDisplayName()));
+
+                finish();
+
+
+            } else {
+
+            }
         }
     }
     // [END onActivityResult]
 
-    // [START handleSignInResult]
-    private void handleSignInResult(GoogleSignInResult result) {
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
-            finish();
-            // Signed in successfully, show authenticated UI.
-            //     account = result.getSignInAccount();
-
-
-        } else {
-            // Signed out, show unauthenticated UI.
-
-        }
-    }
-    // [END handleSignInResult]
 }
