@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private  GoogleApiClient mGoogleApiClient;
+    private GoogleApiClient mGoogleApiClient;
 
     private static final String TAG = "MainActivity";
 

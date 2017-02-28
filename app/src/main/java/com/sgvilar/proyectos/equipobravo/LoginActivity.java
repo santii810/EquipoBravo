@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
 
             if (result.isSuccess()) {
-             MainActivity.getUserMapper().add(new User(result.getSignInAccount().getEmail(), result.getSignInAccount().getDisplayName()));
+                MainActivity.getUserMapper().add(new User(result.getSignInAccount().getEmail(), result.getSignInAccount().getDisplayName()));
 
                 finish();
 
