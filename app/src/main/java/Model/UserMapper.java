@@ -33,21 +33,23 @@ public class UserMapper {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 //TODO mostrar mensaje de que no hay conexion
+ //               Snackbar.make(this, "Conexion perdida",Snackbar.LENGTH_LONG).show();
             }
         });
     }
 
 
     public static void add(User usuario) {
-
+Log.e(TAG,usuario.getId());
 
         Map<String, Object> postValues = usuario.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put(Integer.toString(countUsers), postValues);
+        //put(key,object)
+
+        childUpdates.put(usuario.getId(), postValues);
 
         mDatabase.updateChildren(childUpdates);
-        countUsers++;
-        //TODO aumentar count_users en firebase
+
     }
 
 }
