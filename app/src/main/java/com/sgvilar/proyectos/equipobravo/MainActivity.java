@@ -24,6 +24,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 
+import model.User;
 import model.UserMapper;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -46,11 +47,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private static final String TAG = "MainActivity";
 
-    public static UserMapper getUserMapper() {
-        return userMapper;
-    }
-
     private static UserMapper userMapper;
+    private static User currentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +89,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-
-        userMapper = new UserMapper();
     }
 
     @Override
@@ -107,16 +104,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
             // and the GoogleSignInResult will be available instantly.
 
-
-            Log.d(TAG, "Got cached sign-in");
-//            GoogleSignInResult result = opr.get();
-//            handleSignInResult(result);
+            Log.i(TAG, "Got cached sign-in");
+            GoogleSignInResult result = opr.get();
+            MainActivity.setCurrentUser(new User(result.getSignInAccount()));
 
 
         } else {
             // If the user has not previously signed in on this device or the sign-in has expired,
             // this asynchronous branch will attempt to sign in the user silently.  Cross-device
             // single sign-on will occur in this branch.
+            Log.i(TAG, "Start sign in activity");
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
         }
@@ -218,5 +215,24 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
             return null;
         }
+    }
+
+
+    /*
+    *
+    * GETTERS AND SETTERS
+    *
+    * */
+    public static UserMapper getUserMapper() {
+        return userMapper;
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User currentUser) {
+        MainActivity.currentUser = currentUser;
+        userMapper = new UserMapper(currentUser);
     }
 }

@@ -1,5 +1,6 @@
 package model;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
@@ -12,11 +13,31 @@ import java.util.Map;
 public class User {
     private String userMail;
     private String userName;
-    private int points;
+    private int actualPoints;
+    private String id;
 
     public User(String userMail, String userName) {
         this.userMail = userMail;
         this.userName = userName;
+        this.id = prepareId(userMail);
+
+    }
+
+    public User(GoogleSignInAccount signInAccount) {
+        this.userMail = signInAccount.getEmail();
+        this.userName = signInAccount.getDisplayName();
+        this.id = prepareId(userMail);
+
+    }
+
+    private String prepareId(String userMail) {
+        String direccion = userMail.split("@")[0];
+        direccion = direccion.replace(".", "");
+        direccion = direccion.replace(",", "");
+        direccion = direccion.replace(":", "");
+        direccion = direccion.replace("_", "");
+        direccion = direccion.replace("-", "");
+        return direccion;
     }
 
     @Exclude
@@ -24,7 +45,7 @@ public class User {
         HashMap<String, Object> result = new HashMap<>();
         result.put("userMail", userMail);
         result.put("userName", userName);
-        result.put("points", points);
+        result.put("actualPoints", actualPoints);
         return result;
     }
 
@@ -45,13 +66,19 @@ public class User {
         this.userName = userName;
     }
 
-    public int getPoints() {
-        return points;
+    public int getActualPoints() {
+        return actualPoints;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
+    public void setActualPoints(int actualPoints) {
+        this.actualPoints = actualPoints;
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 }
