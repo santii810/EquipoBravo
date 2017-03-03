@@ -15,7 +15,6 @@ import java.util.Map;
 
 public class UserMapper {
     private static DatabaseReference mDatabase;
-    private static int countUsers;
     private final static String TAG = "UserMapper";
 
     public UserMapper(final User currentUser) {
