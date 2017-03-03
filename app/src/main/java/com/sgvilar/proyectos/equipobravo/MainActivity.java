@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -179,9 +178,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
 
 
-                View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-                TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-                textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+                View rootView = inflater.inflate(R.layout.fragment_clasification, container, false);
+//                TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+//                textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
                 return rootView;
 
             } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
