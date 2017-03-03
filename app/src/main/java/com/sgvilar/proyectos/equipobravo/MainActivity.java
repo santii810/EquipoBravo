@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.containerMain);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -173,10 +173,24 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
+
+
+            Log.i(TAG, "a" + getArguments().getInt(ARG_SECTION_NUMBER));
+            if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+
+
+                View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+                TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+                textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+                return rootView;
+
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+                View rootView = inflater.inflate(R.layout.fragment_hystory, container, false);
+
+
+                return rootView;
+            }
+            return null;
         }
     }
 
